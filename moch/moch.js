@@ -81,6 +81,7 @@ export async function applyMochs(streams, config) {
   if (!streams?.length || !hasMochConfigured(config)) {
     return streams;
   }
+  console.log('Applying mochs', config, streams);
   return Promise.all(Object.keys(config)
       .filter(configKey => MochOptions[configKey])
       .map(configKey => MochOptions[configKey])

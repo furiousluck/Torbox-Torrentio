@@ -120,6 +120,7 @@ async function movieRecordsHandler(args) {
 
 function enrichCacheParams(streams) {
   let cacheAge = CACHE_MAX_AGE;
+  console.log('Enriching cache params', streams);
   if (!streams.length) {
     cacheAge = CACHE_MAX_AGE_EMPTY;
   } else if (streams.every(stream => stream?.url?.endsWith(StaticLinks.FAILED_ACCESS))) {
