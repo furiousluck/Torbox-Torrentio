@@ -25,7 +25,7 @@ builder.defineStreamHandler((args) => {
   if (!args.id.match(/tt\d+/i) && !args.id.match(/kitsu:\d+/i)) {
     return Promise.resolve({ streams: [] });
   }
-
+  console.log(`Incoming stream ${args.id} request with type=${args.type} and extra=${args.extra}`)
   return requestQueue.wrap(args.id, () => resolveStreams(args))
       .then(streams => applyFilters(streams, args.extra))
       .then(streams => applySorting(streams, args.extra, args.type))
