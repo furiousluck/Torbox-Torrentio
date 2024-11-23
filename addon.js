@@ -78,13 +78,16 @@ async function resolveStreams(args) {
 
 async function streamHandler(args) {
   const torrentioEndpoint = process.env.TORRENTIO_ENDPOINT || 'https://torrentio.strem.fun/stream';
-  console.log(`Incoming stream ${args.id} request with type=${args.type} along with ${torrentioEndpoint}`)
+  // console.log(`Incoming stream ${args.id} request with type=${args.type} along with ${torrentioEndpoint}`)
   if (args.type === Type.MOVIE) {
     const res = await fetch(`${torrentioEndpoint}/movie/${args.id}.json`).then(res => res.json())
+    console.log("heloo",res?.streams)
     return res?.streams
     // return movieRecordsHandler(args);
   } else if (args.type === Type.SERIES) {
-      return (await fetch(`${torrentioEndpoint}/series/${args.id}.json`).then(res => res.json()))?.streams
+    const res =  (await fetch(`${torrentioEndpoint}/series/${args.id}.json`).then(res => res.json()))
+    console.log("heloo",res?.streams)
+    return res?.streams
     // return seriesRecordsHandler(args);
   }
   return Promise.reject('not supported type');
