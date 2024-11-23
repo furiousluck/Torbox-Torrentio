@@ -65,6 +65,7 @@ builder.defineMetaHandler((args) => {
 })
 
 async function resolveStreams(args) {
+  console.log(`Incoming stream ${args.id} request`)
   return cacheWrapStream(args.id, () => newLimiter(() => streamHandler(args)))
     //   .then(records => {
     //     // console.log(records)
