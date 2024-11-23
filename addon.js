@@ -78,6 +78,7 @@ async function resolveStreams(args) {
 
 async function streamHandler(args) {
   const torrentioEndpoint = process.env.TORRENTIO_ENDPOINT || 'https://torrentio.strem.fun/stream';
+  console.log(`Incoming stream ${args.id} request with type=${args.type} along with ${torrentioEndpoint}`)
   if (args.type === Type.MOVIE) {
     const res = await fetch(`${torrentioEndpoint}/movie/${args.id}.json`).then(res => res.json())
     return res?.streams
@@ -120,7 +121,7 @@ async function movieRecordsHandler(args) {
 
 function enrichCacheParams(streams) {
   let cacheAge = CACHE_MAX_AGE;
-  console.log('Enriching cache params', streams);
+  // console.log('Enriching cache params', streams);
   if (!streams.length) {
     cacheAge = CACHE_MAX_AGE_EMPTY;
   } else if (streams.every(stream => stream?.url?.endsWith(StaticLinks.FAILED_ACCESS))) {
